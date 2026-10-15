@@ -9,7 +9,7 @@ env:
   LOCATION: westus2
   TEMPLATE-FILE: infra/webapp.bicep
   SUBSCRIPTION-ID: da05cda9-5112-4b09-8b21-efba1bd10355
-  WEBAPP-NAME: eshoponweb-webapp-drewhiggy
+  WEBAPP-NAME: eshoponweb-webapp-drew
 
 jobs:
   #Build, test and publish .net web project in repository
@@ -73,16 +73,16 @@ jobs:
       - name: Azure Login
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.rmB8Q~4UQTKLwCrWBGCmIFvGJ.NR5BpcILN_3a9m }}
 
       # Deploy Azure WebApp using Bicep file
       - name: deploy
         uses: azure/arm-deploy@v2
         with:
-          subscriptionId: ${{ env.SUBSCRIPTION-ID }}
-          resourceGroupName: ${{ env.RESOURCE-GROUP }}
+          subscriptionId: ${{ env.da05cda9-5112-4b09-8b21-efba1bd10355 }}
+          resourceGroupName: ${{ env.rg-eshoponweb-DREW }}
           template: bicep-template/webapp.bicep
-          parameters: "webAppName=${{ env.WEBAPP-NAME }} location=${{ env.LOCATION }}"
+          parameters: "webAppName=${{ env.eshoponweb-webapp-DREW }} location=${{ env.westus2 }}"
           failOnStdErr: false
 
       # Publish website to Azure App Service (WebApp)
@@ -92,7 +92,7 @@ jobs:
         uses: Azure/webapps-deploy@v3
         with:
           type: ZIP
-          app-name: ${{ env.WEBAPP-NAME  }}
+          app-name: ${{ env.eshoponweb-webapp-drew  }}
           package: .net-app/app.zip
 
       # Publish website to Azure App Service using CLI (WebApp)
@@ -100,4 +100,4 @@ jobs:
         uses: Azure/cli@v2
         with:
           inlineScript: |
-            az webapp deploy --name ${{ env.WEBAPP-NAME }} --resource-group ${{ env.RESOURCE-GROUP }} --src-path .net-app/app.zip --type zip
+            az webapp deploy --name ${{ env.eshoponweb-webapp-drew }} --resource-group ${{ env.rg-eshoponweb-DREW }} --src-path .net-app/app.zip --type zip
